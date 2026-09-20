@@ -379,7 +379,7 @@
 
     <section id="forderung">
       <h2>Unsere Forderung</h2>
-      <p class="section-lead">Empfänger sollen einen gesetzlichen Anspruch bekommen, Rechnungen und vergleichbare Dokumente digital erhalten zu können. Der digitale Empfang muss einfach, dokumentiert und alltagstauglich sein.</p>
+      <p class="section-lead">Empfänger sollen einen gesetzlichen Anspruch bekommen, Rechnungen sowie staatliche und behördliche Dokumente digital erhalten zu können. Der digitale Empfang muss einfach, dokumentiert und alltagstauglich sein.</p>
       <div class="statement">
         <strong>Wahlrecht für Empfänger.</strong>
         <p>Wer digitale Zustellung möchte, soll sie bekommen. Unternehmen und öffentliche Stellen sollen dafür einen verlässlichen Weg anbieten müssen.</p>
