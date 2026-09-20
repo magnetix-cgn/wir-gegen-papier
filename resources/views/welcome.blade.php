@@ -285,6 +285,40 @@
     .not-demanded {
       border-left-color: var(--red);
     }
+    .process {
+      counter-reset: process;
+    }
+    .process article {
+      position: relative;
+      padding-top: 54px;
+    }
+    .process article::before {
+      counter-increment: process;
+      content: counter(process);
+      position: absolute;
+      top: 18px;
+      left: 20px;
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: var(--green);
+      color: var(--paper);
+      font-weight: 950;
+    }
+    .source-box {
+      margin-top: 26px;
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-left: 8px solid var(--green);
+      border-radius: 8px;
+      background: var(--panel);
+    }
+    .source-box a {
+      color: var(--ink);
+      font-weight: 850;
+    }
     ul {
       margin: 18px 0 0;
       padding-left: 20px;
@@ -331,7 +365,9 @@
       <a class="brand" href="/">Wir gegen Papier</a>
       <nav aria-label="Seitennavigation">
         <a href="#problem">Problem</a>
+        <a href="#zeit">Zeit</a>
         <a href="#forderung">Forderung</a>
+        <a href="#digital-zuerst">Ablauf</a>
         <a href="#fakten">Fakten</a>
         <a href="#unterstuetzen">Unterstützen</a>
         <a href="#datenschutz">Datenschutz</a>
@@ -346,8 +382,8 @@
         <p class="eyebrow">Empfängerrecht statt Papierzwang</p>
         <h1>Wir gegen Papier.</h1>
         <p class="claim">Digital, wenn ich will.</p>
-        <p class="lead">Rechnungen, Bescheide und vergleichbare Dokumente sollen digital zugestellt werden können, wenn Empfänger das wollen. Papier darf möglich bleiben, aber nicht die einzige Option sein.</p>
-        <p class="punch">Ihr hattet genug Zeit.</p>
+        <p class="lead">Rechnungen, Bescheide und vergleichbare Dokumente sollen digital zugestellt werden können, wenn Empfänger das wollen. Papier darf möglich bleiben, aber nicht die erste und einzige Option sein.</p>
+        <p class="punch">Digital zuerst. Papier nur, wenn es nötig ist.</p>
         <div class="actions">
           <a class="button primary" href="#unterstuetzen">Jetzt unterstützen</a>
           <a class="button" href="#forderung">Forderung lesen</a>
@@ -377,12 +413,35 @@
       </div>
     </section>
 
+    <section id="zeit">
+      <h2>Unternehmen hatten genug Zeit.</h2>
+      <p class="section-lead">Wir überweisen Geld per Smartphone, schließen Verträge online ab und Unternehmen tauschen Rechnungen zunehmend digital aus. Trotzdem hören private Empfänger noch immer: „Digital geht bei uns nicht. Sie bekommen das per Post.“</p>
+      <div class="grid">
+        <article>
+          <h3>Warum 2026 noch Papier?</h3>
+          <p>Die Technik ist da. Was fehlt, ist ein Anspruch für Empfänger, digitale Zustellung auch tatsächlich wählen zu können.</p>
+        </article>
+        <article>
+          <h3>B2B ist weiter</h3>
+          <p>Seit 2025 müssen inländische Unternehmen grundsätzlich E-Rechnungen empfangen können. Privatkunden profitieren davon nicht automatisch.</p>
+        </article>
+        <article>
+          <h3>Jetzt sind Empfänger dran</h3>
+          <p>Wer Unterlagen digital haben möchte, soll nicht mehr gezwungen werden, Papier zu akzeptieren.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="forderung">
       <h2>Unsere Forderung</h2>
       <p class="section-lead">Empfänger sollen einen gesetzlichen Anspruch bekommen, Rechnungen sowie staatliche und behördliche Dokumente digital erhalten zu können. Der digitale Empfang muss einfach, dokumentiert und alltagstauglich sein.</p>
       <div class="statement">
         <strong>Wahlrecht für Empfänger.</strong>
-        <p>Wer digitale Zustellung möchte, soll sie bekommen. Unternehmen und öffentliche Stellen sollen dafür einen verlässlichen Weg anbieten müssen.</p>
+        <p>Wer digitale Zustellung möchte, soll sie bekommen. Unternehmen und öffentliche Stellen sollen dafür einen verlässlichen Weg anbieten müssen: E-Mail, Kundenportal, Download oder ein anderer geeigneter elektronischer Zustellweg.</p>
+      </div>
+      <div class="statement">
+        <strong>Digital zuerst. Papier als Fallback.</strong>
+        <p>Unsere Forderung ist ein klarer rechtlicher und technischer Rahmen: Wenn Empfänger digitale Zustellung wählen und den Empfang bestätigen, soll kein zusätzlicher Papierbrief nötig sein. Wenn keine Bestätigung erfolgt, bleibt Papier der sichere Fallback.</p>
       </div>
       <div class="statement not-demanded">
         <strong>Was wir nicht fordern</strong>
@@ -390,14 +449,38 @@
       </div>
     </section>
 
+    <section id="digital-zuerst">
+      <h2>Digital zustellen. Empfang bestätigen. Papier sparen.</h2>
+      <p class="section-lead">Der praktische Ablauf soll einfach sein und rechtlich sauber geregelt werden. Die Kampagne behauptet nicht, dass jede einfache E-Mail-Bestätigung heute schon eine förmliche Zustellung oder ein Einschreiben ersetzt.</p>
+      <div class="grid process">
+        <article>
+          <h3>Digital zustellen</h3>
+          <p>Der Absender stellt Rechnung, Bescheid oder vergleichbares Dokument über einen geeigneten digitalen Weg bereit.</p>
+        </article>
+        <article>
+          <h3>Empfang bestätigen</h3>
+          <p>Der Empfänger bestätigt aktiv, dass das Dokument angekommen ist und digital angenommen wird.</p>
+        </article>
+        <article>
+          <h3>Papier nur als Fallback</h3>
+          <p>Bleibt die Bestätigung innerhalb einer definierten Frist aus, wird das Schreiben wie bisher auf Papier versendet.</p>
+        </article>
+      </div>
+    </section>
+
     <section id="fakten">
       <h2>Fakten und Rechtslage</h2>
-      <p class="section-lead">Die E-Rechnung kommt in Deutschland schrittweise im B2B-Bereich. Trotzdem bleiben viele alltägliche Dokumente, Kundenkommunikation und Empfängerwünsche ungeregelt oder zu kompliziert.</p>
+      <p class="section-lead">Seit dem 1. Januar 2025 müssen inländische Unternehmen grundsätzlich E-Rechnungen empfangen können. Für das Ausstellen gelten Übergangsregelungen. Rechnungen an private Endverbraucher sind von dieser B2B-Regelung nicht entsprechend erfasst.</p>
       <ul>
-        <li>Digitale Rechnungsprozesse sind technisch etabliert.</li>
-        <li>Viele Empfänger haben bereits sichere digitale Postfächer oder E-Mail-Prozesse.</li>
-        <li>Ein klares Empfängerwahlrecht würde Umsetzung und Erwartung vereinfachen.</li>
+        <li>Unternehmen können untereinander längst strukturierte elektronische Rechnungen empfangen.</li>
+        <li>Für Rechnungsaussteller bestehen Übergangsfristen, unter anderem bis Ende 2026 und in bestimmten Fällen bis Ende 2027.</li>
+        <li>Private Empfänger brauchen ein eigenes Wahlrecht, damit digitale Zustellung nicht vom guten Willen einzelner Absender abhängt.</li>
       </ul>
+      <div class="source-box">
+        <strong>Quelle und Einordnung</strong>
+        <p>Die Aussagen zur E-Rechnung beziehen sich auf die FAQ des Bundesministeriums der Finanzen zur verpflichtenden E-Rechnung. Dort wird auch klargestellt, dass die Regelungen Ausnahmen, Übergänge und eigene Geltungsbereiche haben.</p>
+        <a href="https://www.bundesfinanzministerium.de/Content/DE/FAQ/e-rechnung.html" rel="noopener">BMF-FAQ zur E-Rechnung öffnen</a>
+      </div>
     </section>
 
     <section id="unterstuetzen">
