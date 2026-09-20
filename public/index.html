@@ -16,6 +16,23 @@
       --green: #168a5b;
       --blue: #2464a8;
       --gold: #c8942e;
+      --shadow: rgba(24, 33, 38, .08);
+      --sheet: #ffffff;
+      --sheet-shadow: rgba(24, 33, 38, .11);
+    }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #edf7f2;
+      --muted: #a9bbb4;
+      --paper: #101816;
+      --panel: #17231f;
+      --line: #2d4139;
+      --green: #59d19b;
+      --blue: #7fb6ee;
+      --gold: #e2b85a;
+      --shadow: rgba(0, 0, 0, .3);
+      --sheet: #1e2a26;
+      --sheet-shadow: rgba(0, 0, 0, .28);
     }
     * { box-sizing: border-box; }
     body {
@@ -24,6 +41,39 @@
       background: var(--paper);
       color: var(--ink);
       line-height: 1.55;
+    }
+    .topbar {
+      position: fixed;
+      z-index: 10;
+      top: 18px;
+      right: 18px;
+    }
+    .theme-toggle {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 42px;
+      padding: 0 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--panel) 88%, transparent);
+      color: var(--ink);
+      box-shadow: 0 14px 36px var(--shadow);
+      cursor: pointer;
+      font: inherit;
+      font-weight: 800;
+      backdrop-filter: blur(14px);
+    }
+    .theme-toggle span {
+      display: grid;
+      place-items: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: var(--paper);
+      font-size: .8rem;
+      line-height: 1;
     }
     main {
       width: min(100% - 32px, 1120px);
@@ -83,7 +133,7 @@
       display: grid;
       place-items: center;
       padding: 28px;
-      box-shadow: 0 20px 60px rgba(24, 33, 38, .08);
+      box-shadow: 0 20px 60px var(--shadow);
     }
     .paper-stack {
       width: min(100%, 340px);
@@ -93,9 +143,9 @@
     .sheet {
       position: absolute;
       inset: 0;
-      background: #fff;
+      background: var(--sheet);
       border: 1px solid var(--line);
-      box-shadow: 0 16px 35px rgba(24, 33, 38, .11);
+      box-shadow: 0 16px 35px var(--sheet-shadow);
     }
     .sheet:nth-child(1) { transform: rotate(-7deg) translate(-14px, 10px); }
     .sheet:nth-child(2) { transform: rotate(4deg) translate(16px, -6px); }
@@ -155,10 +205,26 @@
       header { min-height: auto; padding-top: 26px; }
       .mark { min-height: 320px; }
       main { padding: 30px 0; }
+      .topbar { top: 12px; right: 12px; }
+      .theme-toggle strong { display: none; }
     }
   </style>
+  <script>
+    (() => {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = saved || (prefersDark ? 'dark' : 'light');
+      document.documentElement.dataset.theme = theme;
+    })();
+  </script>
 </head>
 <body>
+  <div class="topbar">
+    <button class="theme-toggle" type="button" aria-label="Darstellung umschalten" aria-pressed="false">
+      <span aria-hidden="true">D</span>
+      <strong>Dark Mode</strong>
+    </button>
+  </div>
   <main>
     <header>
       <div>
@@ -206,5 +272,27 @@
       <p>wir-gegen-papier.de · Eine Initiative für pragmatische Digitalisierung.</p>
     </footer>
   </main>
+  <script>
+    (() => {
+      const button = document.querySelector('.theme-toggle');
+      const icon = button.querySelector('span');
+      const label = button.querySelector('strong');
+
+      function setTheme(theme) {
+        document.documentElement.dataset.theme = theme;
+        localStorage.setItem('theme', theme);
+        const isDark = theme === 'dark';
+        button.setAttribute('aria-pressed', String(isDark));
+        icon.textContent = isDark ? 'L' : 'D';
+        label.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      }
+
+      button.addEventListener('click', () => {
+        const current = document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+        setTheme(current === 'dark' ? 'light' : 'dark');
+      });
+      setTheme(document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light');
+    })();
+  </script>
 </body>
 </html>
