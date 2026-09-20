@@ -69,6 +69,19 @@ CACHE_STORE=file
 QUEUE_CONNECTION=sync
 ```
 
+Required production database values on `ai`:
+
+```text
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=skill-wir-gegen-papier
+DB_USERNAME=skill_wir_gegen_papier
+```
+
+The database password is stored only on the server in `/root/wir-gegen-papier-mysql.env` and is not committed.
+The previous SQLite database was backed up under `/root/wir-gegen-papier.database.sqlite.backup.*` before the MySQL migration.
+
 Required mail values for supporter double opt-in on `ai`:
 
 ```text
