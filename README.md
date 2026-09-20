@@ -73,13 +73,14 @@ Required mail values for supporter double opt-in on `ai`:
 
 ```text
 MAIL_MAILER=sendmail
-MAIL_SENDMAIL_PATH="/usr/sbin/sendmail -bs -i"
+MAIL_SENDMAIL_PATH="/usr/sbin/sendmail -t -oi"
 MAIL_FROM_ADDRESS=kontakt@wir-gegen-papier.de
 MAIL_FROM_NAME="Wir gegen Papier"
 ```
 
-Use the local production mail transport convention on `ai`; do not commit
-mail secrets or `.env`.
+Use the local production mail transport convention on `ai`: Laravel calls
+`/usr/sbin/sendmail`, Postfix relays through Mailjet. Do not commit mail
+secrets or `.env`.
 
 Deployment update:
 
