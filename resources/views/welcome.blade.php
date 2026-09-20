@@ -4,6 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Wir gegen Papier fordert ein Wahlrecht: Rechnungen und vergleichbare Dokumente digital erhalten, wenn Empfänger das wollen.">
+  <meta property="og:title" content="Wir gegen Papier - Digital, wenn ich will.">
+  <meta property="og:description" content="Weniger Papierzwang. Mehr digitale Wahlfreiheit für Empfänger.">
+  <meta property="og:image" content="{{ asset('assets/campaign/hero-triptych.png') }}">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="{{ asset('assets/campaign/hero-triptych.png') }}">
   <title>Wir gegen Papier - Digital, wenn ich will.</title>
   <style>
     :root {
@@ -209,35 +215,21 @@
       color: var(--red);
       font-weight: 800;
     }
-    .poster {
+    .hero-visual {
       min-height: 460px;
       border: 1px solid var(--line);
       background: var(--panel);
       box-shadow: 0 22px 70px var(--shadow);
-      display: grid;
-      place-items: center;
-      padding: 30px;
+      overflow: hidden;
+      border-radius: 8px;
     }
-    .poster-card {
-      width: min(100%, 360px);
-      aspect-ratio: 4 / 5;
-      border: 2px solid var(--ink);
-      display: grid;
-      align-content: center;
-      gap: 16px;
-      padding: 34px;
-      transform: rotate(-2deg);
-    }
-    .poster-card b {
-      font-size: clamp(2rem, 5vw, 4rem);
-      line-height: .9;
-      text-transform: uppercase;
-    }
-    .poster-card span {
-      width: fit-content;
-      color: var(--green);
-      font-weight: 950;
-      font-size: 1.2rem;
+    .hero-visual img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 460px;
+      object-fit: cover;
+      object-position: center;
     }
     section {
       padding: 58px 0;
@@ -319,7 +311,8 @@
       .grid,
       .statement { grid-template-columns: 1fr; }
       .hero { min-height: auto; padding: 38px 0 48px; }
-      .poster { min-height: 320px; }
+      .hero-visual,
+      .hero-visual img { min-height: 320px; }
       .supporter-form { grid-template-columns: 1fr; }
       section { padding: 42px 0; }
     }
@@ -360,13 +353,9 @@
           <a class="button" href="#forderung">Forderung lesen</a>
         </div>
       </div>
-      <div class="poster" aria-label="Kampagnenposter">
-        <div class="poster-card">
-          <span>Kein Papierzwang</span>
-          <b>Digital, wenn ich will.</b>
-          <p>Ein klares Wahlrecht für Empfänger.</p>
-        </div>
-      </div>
+      <figure class="hero-visual" aria-label="Kampagnenmotiv Wir gegen Papier">
+        <img src="{{ asset('assets/campaign/hero-triptych.png') }}" alt="Wir gegen Papier Kampagnenmotiv mit Papierbergen und digitaler Dokumentenzustellung">
+      </figure>
     </header>
 
     <section id="problem">
