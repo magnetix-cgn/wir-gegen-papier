@@ -6,6 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', HomeController::class)->name('home');
 
+Route::get('/supporters', fn () => redirect()->route('home', [], 302)->withFragment('unterstuetzen'))
+    ->name('supporters.index');
+
 Route::post('/supporters', [SupporterController::class, 'store'])
     ->middleware('throttle:5,1')
     ->name('supporters.store');
