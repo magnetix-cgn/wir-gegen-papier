@@ -356,7 +356,7 @@
         <p class="lead">Rechnungen, Bescheide und vergleichbare Dokumente sollen digital zugestellt werden können, wenn Empfänger das wollen. Papier darf möglich bleiben, aber nicht die einzige Option sein.</p>
         <p class="punch">Ihr hattet genug Zeit.</p>
         <div class="actions">
-          <a class="button primary" href="#unterstuetzen">Unterstützung vormerken</a>
+          <a class="button primary" href="#unterstuetzen">Jetzt unterstützen</a>
           <a class="button" href="#forderung">Forderung lesen</a>
         </div>
       </div>
