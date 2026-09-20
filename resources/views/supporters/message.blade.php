@@ -15,6 +15,16 @@
       --green: #168a5b;
       --red: #c43a31;
     }
+    :root[data-theme="dark"] {
+      color-scheme: dark;
+      --ink: #edf7f2;
+      --muted: #a9bbb4;
+      --paper: #101816;
+      --panel: #17231f;
+      --line: #2d4139;
+      --green: #59d19b;
+      --red: #ff796f;
+    }
     * { box-sizing: border-box; }
     body {
       margin: 0;
@@ -50,6 +60,7 @@
       padding: 8px 12px;
       border: 1px solid var(--line);
       border-radius: 6px;
+      background: color-mix(in srgb, var(--panel) 78%, var(--paper));
       font-weight: 900;
     }
     form {
@@ -62,9 +73,12 @@
       min-height: 46px;
       border: 1px solid var(--line);
       border-radius: 6px;
+      background: var(--panel);
+      color: var(--ink);
       padding: 0 12px;
       font: inherit;
     }
+    input::placeholder { color: var(--muted); }
     button,
     .button {
       width: fit-content;
@@ -91,6 +105,13 @@
       margin-top: 24px;
     }
   </style>
+  <script>
+    (() => {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      document.documentElement.dataset.theme = saved || (prefersDark ? 'dark' : 'light');
+    })();
+  </script>
 </head>
 <body>
   <main>
