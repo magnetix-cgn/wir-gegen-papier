@@ -156,6 +156,59 @@
       background: var(--ink);
       color: var(--paper);
     }
+    .supporter-form {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto;
+      gap: 10px;
+      margin-top: 26px;
+      max-width: 680px;
+    }
+    .supporter-form label {
+      grid-column: 1 / -1;
+      font-weight: 900;
+    }
+    .supporter-form input {
+      min-height: 48px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      color: var(--ink);
+      padding: 0 13px;
+      font: inherit;
+    }
+    .supporter-form button {
+      min-height: 48px;
+      border: 1px solid var(--ink);
+      border-radius: 6px;
+      background: var(--ink);
+      color: var(--paper);
+      padding: 0 18px;
+      font: inherit;
+      font-weight: 850;
+      cursor: pointer;
+    }
+    .form-note {
+      grid-column: 1 / -1;
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .supporter-count {
+      display: inline-flex;
+      width: fit-content;
+      margin-top: 18px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: var(--panel);
+      font-weight: 900;
+    }
+    .validation-error {
+      grid-column: 1 / -1;
+      margin: 0;
+      color: var(--red);
+      font-weight: 800;
+    }
     .poster {
       min-height: 460px;
       border: 1px solid var(--line);
@@ -267,6 +320,7 @@
       .statement { grid-template-columns: 1fr; }
       .hero { min-height: auto; padding: 38px 0 48px; }
       .poster { min-height: 320px; }
+      .supporter-form { grid-template-columns: 1fr; }
       section { padding: 42px 0; }
     }
   </style>
@@ -287,6 +341,7 @@
         <a href="#forderung">Forderung</a>
         <a href="#fakten">Fakten</a>
         <a href="#unterstuetzen">Unterstützen</a>
+        <a href="#datenschutz">Datenschutz</a>
         <button class="theme-toggle" type="button" aria-label="Darstellung umschalten" aria-pressed="false">Dark Mode</button>
       </nav>
     </div>
@@ -357,17 +412,37 @@
     </section>
 
     <section id="unterstuetzen">
-      <h2>Unterstützung vorbereiten</h2>
-      <p class="section-lead">Die Unterschriften- und Unterstützungsfunktion wird vorbereitet. Bis dahin sammeln wir Rückmeldungen, Beispiele und Unterstützer, die das Wahlrecht sichtbar machen wollen.</p>
-      <div class="actions">
-        <a class="button primary" href="mailto:kontakt@wir-gegen-papier.de?subject=Unterstützung%20Wir%20gegen%20Papier">Kontakt aufnehmen</a>
-        <a class="button" href="https://magnetix.cologne/">Impressum</a>
-      </div>
+      <h2>Jetzt unterstützen</h2>
+      <p class="section-lead">Trag deine E-Mail-Adresse ein und bestätige den Link in der Mail. Erst danach zählt deine Unterstützung öffentlich mit.</p>
+      <span class="supporter-count">{{ $supporterCount ?? 0 }} bestätigte Unterstützer</span>
+      <form class="supporter-form" method="post" action="{{ route('supporters.store') }}">
+        @csrf
+        <label for="supporter-email">E-Mail-Adresse</label>
+        <input id="supporter-email" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" placeholder="deine@email.de">
+        <button type="submit">Jetzt unterstützen</button>
+        @error('email')
+          <p class="validation-error">{{ $message }}</p>
+        @enderror
+        <p class="form-note">Wir verwenden die Adresse nur für diese Unterstützung und die Double-Opt-in-Bestätigung. Das ist keine Newsletter- oder Werbeeinwilligung. Du kannst deine Unterstützung später widerrufen.</p>
+      </form>
+    </section>
+
+    <section id="datenschutz">
+      <h2>Datenschutz und Widerruf</h2>
+      <p class="section-lead">Die Unterstützung der Kampagne ist keine Newsletter-Einwilligung. Wir speichern deine E-Mail-Adresse, den Bestätigungsstatus, den Zeitpunkt der Bestätigung und die Version des Zustimmungstextes. Öffentlicht sichtbar ist nur die Zahl bestätigter Unterstützer.</p>
+      <form class="supporter-form" method="post" action="{{ route('supporters.unsubscribe.request') }}">
+        @csrf
+        <label for="unsubscribe-email">Unterstützung widerrufen</label>
+        <input id="unsubscribe-email" type="email" name="email" required autocomplete="email" placeholder="deine@email.de">
+        <button type="submit">Widerrufs-Mail senden</button>
+        <p class="form-note">Der Widerruf wird ebenfalls per E-Mail-Link bestätigt, damit keine fremden Adressen ausgetragen werden können.</p>
+      </form>
     </section>
   </main>
 
   <footer>
     <span>wir-gegen-papier.de</span>
+    <a href="#datenschutz">Datenschutz</a>
     <a href="https://magnetix.cologne/">Impressum</a>
   </footer>
 

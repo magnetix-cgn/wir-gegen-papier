@@ -69,12 +69,25 @@ CACHE_STORE=file
 QUEUE_CONNECTION=sync
 ```
 
+Required mail values for supporter double opt-in on `ai`:
+
+```text
+MAIL_MAILER=sendmail
+MAIL_SENDMAIL_PATH="/usr/sbin/sendmail -bs -i"
+MAIL_FROM_ADDRESS=kontakt@wir-gegen-papier.de
+MAIL_FROM_NAME="Wir gegen Papier"
+```
+
+Use the local production mail transport convention on `ai`; do not commit
+mail secrets or `.env`.
+
 Deployment update:
 
 ```bash
 cd /var/www/wir-gegen-papier
 git pull --ff-only
 composer install --no-dev --optimize-autoloader
+php artisan migrate --force
 php artisan optimize:clear
 php artisan config:cache
 php artisan route:cache
@@ -108,3 +121,35 @@ The footer links to the existing imprint:
 ```text
 https://magnetix.cologne/
 ```
+
+## Supporter Double Opt-In
+
+Supporters are stored in the `supporters` table.
+
+Flow:
+
+1. A visitor submits an email address on the landing page.
+2. The address is normalized and stored with `pending` status.
+3. A cryptographically random confirmation token is sent by email.
+4. Only the SHA-256 token hash is stored.
+5. The supporter is counted publicly only after a valid confirmation link is
+   opened before expiry.
+6. A confirmed supporter can request a separate unsubscribe email and confirm
+   the withdrawal link.
+
+Status values:
+
+```text
+pending
+confirmed
+unsubscribed
+```
+
+Consent version:
+
+```text
+supporter-v1
+```
+
+The supporter double opt-in is not a newsletter consent. If a newsletter is
+added later, it needs a separate consent text and a separate double opt-in.
